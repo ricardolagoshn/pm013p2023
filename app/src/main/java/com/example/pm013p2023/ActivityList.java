@@ -21,6 +21,7 @@ public class ActivityList extends AppCompatActivity
     SQLiteConexion conexion;
     ListView listView;
     ArrayList<Personas> listperson;
+
     ArrayList<String> ArregloPersonas;
 
 
