@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class ActivityTwo extends AppCompatActivity {
 
-    Button btncreate, btnlist;
+    Button btncreate, btnlist, bntvoz, btncombo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +17,8 @@ public class ActivityTwo extends AppCompatActivity {
 
         btncreate = (Button)findViewById(R.id.btncreate);
         btnlist = (Button)findViewById(R.id.btnlist);
-
+        bntvoz= (Button)findViewById(R.id.bntvoz);
+        btncombo= (Button)findViewById(R.id.btncombo);
         /* Creacion del los listener de los botones */
 
         btncreate.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +33,22 @@ public class ActivityTwo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentcreate = new Intent(getApplicationContext(), ActivityList.class);
+                startActivity(intentcreate);
+            }
+        });
+
+        bntvoz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentcreate = new Intent(getApplicationContext(), ActivitySpeech.class);
+                startActivity(intentcreate);
+            }
+        });
+
+        btncombo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentcreate = new Intent(getApplicationContext(), ActivityCombo.class);
                 startActivity(intentcreate);
             }
         });

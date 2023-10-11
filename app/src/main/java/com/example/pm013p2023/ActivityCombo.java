@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.pm013p2023.Models.Personas;
 import com.example.pm013p2023.configuracion.SQLiteConexion;
@@ -17,44 +15,30 @@ import com.example.pm013p2023.configuracion.Transacciones;
 
 import java.util.ArrayList;
 
-public class ActivityList extends AppCompatActivity
-{
+public class ActivityCombo extends AppCompatActivity {
+
     SQLiteConexion conexion;
-    ListView listView;
+    Spinner combopersonas;
+    EditText nombres, apellidos, correo;
+
     ArrayList<Personas> listperson;
 
     ArrayList<String> ArregloPersonas;
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_combo);
 
-        try
-        {
-            // Establecemos una conxion a base de datos
-            conexion = new SQLiteConexion(this, Transacciones.namedb, null, 1);
-            listView = (ListView) findViewById(R.id.listpersonas);
-            GetPersons();
+        conexion =  new SQLiteConexion(this, Transacciones.namedb, null, 1);
+        combopersonas = (Spinner) findViewById(R.id.spinner);
+        nombres = (EditText) findViewById(R.id.cbnombre);
+        apellidos = (EditText) findViewById(R.id.cbapellidos);
+        correo = (EditText) findViewById(R.id.cbcorreo);
 
-            ArrayAdapter adp = new ArrayAdapter(this, android.R.layout.simple_list_item_1,ArregloPersonas);
-            listView.setAdapter(adp);
+        GetPersons();
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String ItemPerson = listperson.get(i).getNombres();
-                    Toast.makeText(ActivityList.this, "Nombre" + ItemPerson, Toast.LENGTH_LONG).show();
-                }
-            });
-
-        }
-        catch (Exception ex)
-        {
-            ex.toString();
-        }
+        ArrayAdapter<CharSequence> adp = new ArrayAdapter(this, android.R.layout.simple_spinner_item,ArregloPersonas );
+        combopersonas.setAdapter(adp);
 
     }
 
@@ -76,12 +60,12 @@ public class ActivityList extends AppCompatActivity
 
             listperson.add(person);
         }
-        
+
         cursor.close();
-        FillList();
+        FillCombo();
     }
 
-    private void FillList()
+    private void FillCombo()
     {
         ArregloPersonas = new ArrayList<String>();
 
