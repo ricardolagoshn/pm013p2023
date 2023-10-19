@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void AddPerson()
+
     {
         try {
             SQLiteConexion conexion = new SQLiteConexion(this, Transacciones.namedb, null,1);
